@@ -9,6 +9,7 @@ var express = require('express'),
     path = require('path'),
     fs = require('fs');
 
+    
     //Authentication Module
     var auth = require('http-auth');
     var basic = auth.basic({
@@ -47,6 +48,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(methodOverride());
+
 app.use('/style', express.static(path.join(__dirname, '/views/style')));
 
 app.use(auth.connect(basic));
