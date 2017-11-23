@@ -16,16 +16,11 @@ var express = require('express'),
         file: __dirname + "/public/data/passwords"
     });
     console.log(basic);
+    //End of Authentication Module
 var app = express();
 
 var db;
 
-app.use(bodyParser.json());
-app.use(methodOverride());
-app.use('.style', express.static(path.join(__dirname, '/views/style')));
-app.use(auth.connect(basic));
-app.use(express.static(path.join(__dirname, 'public')));
-//End of Authentication Module
 var cloudant;
 
 var fileToUpload;
@@ -52,8 +47,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(methodOverride());
-app.use(express.static(path.join(__dirname, 'public')));
 app.use('/style', express.static(path.join(__dirname, '/views/style')));
+
+app.use(auth.connect(basic));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
